@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b21b6" />
+  <meta name="description" content="Digital Quality Inspection - Site Quality Assurance & Defect Logging" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Quality Inspection" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Digital Quality Inspection</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="top-strip"></div>
+
+  <header class="app-header">
+    <div>
+      <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> QUALITY ASSURANCE</div>
+      <h1>Digital Quality Inspection</h1>
+      <p>Site Quality Assurance &amp; Defect Logging</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-light" id="sampleBtn"><i class="fa-solid fa-flask"></i><span>Sample</span></button>
+      <button class="btn btn-light" id="resetBtn"><i class="fa-solid fa-rotate-left"></i><span>Reset</span></button>
+      <button class="btn btn-primary" id="installBtn" hidden><i class="fa-solid fa-download"></i><span>Install</span></button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="grid-main">
+      <div>
+        <section class="card">
+          <div class="section-title">
+            <div>
+              <h2>Inspection Details</h2>
+              <p>Complete the project and inspector information.</p>
+            </div>
+            <span class="status-pill" id="saveStatus"><i class="fa-solid fa-cloud-arrow-up"></i> Local</span>
+          </div>
+
+          <div class="form-grid">
+            <label>Company Name
+              <input id="companyName" placeholder="Company / Developer" />
+            </label>
+            <label>Project Name
+              <input id="projectName" placeholder="Project name" />
+            </label>
+            <label>Inspection Date
+              <input id="inspectionDate" type="date" />
+            </label>
+            <label>Inspector Name
+              <input id="inspectorName" placeholder="Inspector name" />
+            </label>
+          </div>
+
+          <label class="logo-field">Company Logo
+            <input id="companyLogo" type="file" accept="image/*" />
+          </label>
+          <div id="logoPreview" class="logo-preview hidden"></div>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <div>
+              <h2>Inspection Findings</h2>
+              <p>Add observations, photos and corrective actions.</p>
+            </div>
+            <button class="btn btn-primary" id="addFindingBtn"><i class="fa-solid fa-plus"></i> Add Finding</button>
+          </div>
+          <div id="findings"></div>
+          <div id="emptyState" class="empty-state">
+            <i class="fa-regular fa-clipboard"></i>
+            <strong>No findings yet</strong>
+            <span>Tap “Add Finding” or load the sample data.</span>
+          </div>
+        </section>
+      </div>
+
+      <aside>
+        <section class="card dashboard-card">
+          <div class="ai-banner">
+            <div class="ai-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div><strong>Gemini AI Assistant</strong><span>Professionalize observations &amp; actions</span></div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric"><span>Total Findings</span><strong id="totalFindings">0</strong></div>
+            <div class="metric"><span>Trades</span><strong id="tradeCount">0</strong></div>
+          </div>
+
+          <button class="full-btn" id="summaryBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Executive Summary</button>
+
+          <div class="dashboard-section">
+            <h3>AI Executive Summary</h3>
+            <div id="aiSummary" class="summary-box">Generate a summary after entering your findings.</div>
+          </div>
+
+          <div class="dashboard-section">
+            <h3>Breakdown by Trade</h3>
+            <div id="tradeBreakdown" class="bars"></div>
+          </div>
+
+          <div class="dashboard-section">
+            <h3>Top Comment Types</h3>
+            <div id="typeBreakdown" class="type-list"></div>
+          </div>
+
+          <div class="export-row">
+            <button class="btn btn-outline" id="excelBtn"><i class="fa-solid fa-file-excel"></i> Excel</button>
+            <button class="btn btn-outline" id="printBtn"><i class="fa-solid fa-file-pdf"></i> PDF / Print</button>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
